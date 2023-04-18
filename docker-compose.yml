@@ -1,0 +1,35 @@
+version: '3'
+name: superblog-local-db
+services:
+  sql-server-superblog-db:
+    image: 'mcr.microsoft.com/mssql/server:2022-latest'
+    hostname: 'sql-server-superblog-db'
+    ports:
+      - "1433:1433"
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=SuperP4ssw0rd!
+      - MSSQL_PID=Developer
+    networks:
+      - subnet-superblog
+  sqlpad:
+    image: 'sqlpad/sqlpad:latest'
+    hostname: 'superblog-sqlpad'
+    ports:
+      - '3000:3000'
+    environment:
+      SQLPAD_ADMIN: 'admin@sqlpad.com'
+      SQLPAD_ADMIN_PASSWORD: 'admin'
+      SQLPAD_AUTH_DISABLED: true
+      SQLPAD_CONNECTIONS__demo__name: 'sql-server-superblog-db'
+      SQLPAD_CONNECTIONS__demo__driver: sqlserver
+      SQLPAD_CONNECTIONS__demo__host: 'sql-server-superblog-db'
+      SQLPAD_CONNECTIONS__demo__username: 'sa'
+      SQLPAD_CONNECTIONS__demo__password: 'SuperP4ssw0rd!'
+    volumes:
+      - sqlpad-superblog-volume:/var/lib/sqlpad
+    networks:
+      - subnet-superblog
+
+volumes:
+  sqlpad-superblog-volume:

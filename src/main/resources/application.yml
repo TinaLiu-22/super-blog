@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: superblog-api
+  flyway:
+#    enabled: true
+    enabled: false
+#    locations:
+#      - classpath:/db/migration/h2
+  datasource:
+    url: jdbc:h2:mem:mydb # todo remove
+#    url: jdbc:sqlserver://localhost:1433;databaseencrypt=true;trustServerCertificate=true;
+    driverClassName: org.h2.Driver # todo remove
+#    driverClassName: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    username: sa
+    password: SuperP4ssw0rd!
+  jpa:
+    spring.jpa.database-platform: org.hibernate.dialect.H2Dialect # todo remove
+    show-sql: true
+    hibernate.ddl-auto: none
+    generate-ddl: false
+    properties.hibernate.jdbc.time_zone: UTC
+  h2: # todo remove
+    console:
+      enabled: true
+      path: /h2-console
+      settings.trace: false
+      settings.web-allow-others: false
+
+app:
+  base-path: "/api/v1"
