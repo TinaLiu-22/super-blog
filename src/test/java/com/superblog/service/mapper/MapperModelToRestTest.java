@@ -1,6 +1,7 @@
 package com.superblog.service.mapper;
 
 import com.superblog.controller.generated.api.rest.model.Post;
+import com.superblog.controller.mapper.MapperModelToRest;
 import com.superblog.factory.ModelObjectFactory;
 import com.superblog.factory.RestObjectFactory;
 import org.junit.jupiter.api.BeforeEach;

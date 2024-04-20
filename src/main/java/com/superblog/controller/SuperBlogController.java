@@ -2,9 +2,9 @@ package com.superblog.controller;
 
 import com.superblog.controller.generated.api.rest.SuperBlogApi;
 import com.superblog.controller.generated.api.rest.model.Post;
+import com.superblog.controller.mapper.MapperModelToRest;
 import com.superblog.controller.mapper.MapperRestToModel;
 import com.superblog.service.PostService;
-import com.superblog.service.mapper.MapperModelToRest;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,15 +49,6 @@ public class SuperBlogController implements SuperBlogApi {
     }
 
     @Override
-    public ResponseEntity<List<Post>> getBlog() {
-        return ResponseEntity.ok(
-                postService.getBlog()
-                        .stream()
-                        .map(mapperModelToRest::postModelToRest)
-                        .collect(Collectors.toList()));
-    }
-
-    @Override
     public ResponseEntity<Post> updatePost(String postId, Post post) {
         return ResponseEntity.ok(
                 mapperModelToRest.postModelToRest(
@@ -71,6 +62,15 @@ public class SuperBlogController implements SuperBlogApi {
         return ResponseEntity.ok(
                 mapperModelToRest.postModelToRest(
                         postService.getPost(postId)));
+    }
+
+    @Override
+    public ResponseEntity<List<Post>> getBlog() {
+        return ResponseEntity.ok(
+                postService.getBlog()
+                        .stream()
+                        .map(mapperModelToRest::postModelToRest)
+                        .collect(Collectors.toList()));
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.superblog.service.mapper;
+package com.superblog.controller.mapper;
 
 import com.superblog.controller.generated.api.rest.model.Post;
 import com.superblog.service.pojo.PostModel;
